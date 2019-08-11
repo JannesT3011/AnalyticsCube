@@ -8,7 +8,6 @@ def bot_requests(message: discord.message.Message, cmd_name:str, db):
     for role in message.author.roles:
         _roles.append(str(role))
     push_data = {"cmdname": cmd_name, "timestamp": utcnow, "channelid": str(message.channel.id), "roles": _roles}
-    print(push_data)
     db.update({"_id": str(message.guild.id)}, {"$push": {"bot_requests": push_data}})
     del _roles
     return
