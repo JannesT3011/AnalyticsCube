@@ -8,7 +8,6 @@ class BotJoin(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
-        print("drauf")
         try:
             Database().init_db(str(guild.id))
         except pymongo.errors.DublicateKeyError:
