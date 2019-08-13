@@ -32,8 +32,6 @@ class Message(commands.Cog):
         # push the date into the database
         self.bot.db.update({"_id": str(message.guild.id)}, {"$push": {"message": push_data}})
         del _roles
-
-        await self.bot.process_commands(message)
         return
 
     @commands.command(name="test")

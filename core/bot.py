@@ -3,7 +3,8 @@ from discord import utils
 from core.database import DbClient
 from CONFIG import TOKEN
 
-COGS = ["dataminer.message", "dataminer.reaction", "dataminer.member", "util.guild_event"]
+COGS = ["dataminer.message", "dataminer.reaction", "dataminer.member", "util.guild_event", "cogs.stats"]
+
 
 async def run():
     bot = Bot()
@@ -35,9 +36,8 @@ class Bot(commands.AutoShardedBot):
     
     async def on_ready(self):
         print(f"{self.user.id}\n"f"{utils.oauth_url(self.user.id)}\n"f"{self.user.name}\n""Ready!")
-    
-    # async def on_message(self, message):
-    #     if not message.guild:
-    #         return
-    #
-    #     await self.process_commands(message)
+
+    async def on_message(self, message):
+        if not message.guild:
+            return
+        await self.process_commands(message)

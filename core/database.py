@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from CONFIG import CONNECTION, CLUSTER, DB
+from dataminer import utcnow
 
 
 class DbClient:
@@ -38,7 +39,8 @@ def db_layout(guildid: str):
                     "userjoins": [],
                     "userleave": [],
                     "mentions": [],
-                    "bot_msg": []
+                    "bot_msg": [],
+                    "server_join": utcnow
                     }
 
     return default_data
