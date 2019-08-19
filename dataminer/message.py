@@ -24,6 +24,8 @@ class Message(commands.Cog):
         if len(message.role_mentions) > 0:
             mentions_data(message, self.bot.db)
             return
+        if message.content.startswith(self.bot.command_prefix):
+            return
         # count messages here
         _roles = []
         for role in message.author.roles:

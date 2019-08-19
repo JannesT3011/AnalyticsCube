@@ -1,2 +1,4 @@
+disputils
+pandas
 discord.py
 pymongo
