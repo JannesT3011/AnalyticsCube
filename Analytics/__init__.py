@@ -1,1 +1,1 @@
-from Analytics.analytics import MessageAnalytics
+from Analytics.analytics import Analytics

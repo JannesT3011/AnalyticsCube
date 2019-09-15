@@ -5,7 +5,7 @@ from util.create_csv import create_csv
 from dataminer import today, month, year
 
 
-class MessageAnalytics:
+class Analytics:
     def __init__(self, server_id: str):
         self.db = DbClient().collection
         self.server_id = server_id
@@ -14,19 +14,17 @@ class MessageAnalytics:
     @staticmethod
     def no_data_embed(topic: str) -> Embed:
         """CREATE AN EMBED IF NO DATA WAS COLLECTED"""
-        embed = Embed(title="SORRY", description=f"Sorry, but there were no `{topic}` collected on this server!")
+        embed = Embed(title="SORRY", description=f"Sorry, but there were no `{topic}` data collected on this server!")
         return embed
 
-    def analyze(self):
+    def analyze_message(self):
         """ANALYZE THE MESSAGE DATA"""
         data = self.data["message"]
 
         if len(data) == 0:
             return self.no_data_embed("message")
-        elif len(data) == 1:
-            return data[0]
 
-        # CONVERT MONGODB JSON DATA TO CSV
+        # CONVERT MONGODB JSON DATA TO CSV:
         csv_col = ["msgid", "timestamp", "roles", "channelid"]
         csv_file = f"./src/csv/{self.server_id}_message.csv"
         create_csv(csv_file, csv_col, data)
@@ -35,11 +33,199 @@ class MessageAnalytics:
         df = pandas.read_csv(f"./src/csv/{self.server_id}_message.csv")
         channelid_counts = pandas.value_counts(df["channelid"])
         role_counts = pandas.value_counts(df["roles"])
+        df["timestamp"] = pandas.to_datetime(df["timestamp"])
+        df["hours"] = df["timestamp"].dt.hour
+        df["weekday"] = df["timestamp"].dt.day_name()
+        hours_count = pandas.value_counts(df["hours"])
+        weekday_count = pandas.value_counts(df["weekday"])
 
         embed_title = "Message ~ Analytics"
         embeds = [
             Embed(title=embed_title, description="Here you can see the analyzed message data"),
             Embed(title=embed_title, description="Message counted in channels:\n"f"```{channelid_counts}```"),
-            Embed(title=embed_title, description="Message send from roles:\n"f"```{role_counts}```")
+            Embed(title=embed_title, description="Message send from roles:\n"f"```{role_counts}```"),
+            Embed(title=embed_title, description="Message counted in which hours:\n"f"```{hours_count}```"),
+            Embed(title=embed_title, description="Message counted on which weekday:\n"f"```{weekday_count}```")
+        ]
+        return embeds
+
+    def analyze_reaction(self):
+        """ANALYZE THE REACTION DATA"""
+        data = self.data["reaction"]
+
+        if len(data) == 0:
+            return self.no_data_embed("reaction")
+
+        # CONVERT MONGODB JSON DATA TO CSV:
+        csv_col = ["reactionname", "timestamp", "roles", "channelid"]
+        csv_file = f"./src/csv/{self.server_id}_reaction.csv"
+        create_csv(csv_file, csv_col, data)
+
+        # ANALYZE THE DATA:
+        df = pandas.read_csv(f"./src/csv/{self.server_id}_reaction.csv")
+        name_count = pandas.value_counts(df["reactionname"])
+        role_counts = pandas.value_counts(df["roles"])
+        channelid_counts = pandas.value_counts(df["channelid"])
+        df["timestamp"] = pandas.to_datetime(df["timestamp"])
+        df["hours"] = df["timestamp"].dt.hour
+        df["weekday"] = df["timestamp"].dt.day_name()
+        hours_count = pandas.value_counts(df["hours"])
+        weekday_count = pandas.value_counts(df["weekday"])
+
+        embed_title = "Reaction ~ Analytics"
+        embeds = [
+            Embed(title=embed_title, description="Here you can see the analyzed reaction data"),
+            Embed(title=embed_title, description="Reaction counted by name:\n"f"```{name_count}```"),
+            Embed(title=embed_title, description="Reaction counted in channels:\n"f"```{channelid_counts}```"),
+            Embed(title=embed_title, description="Reaction send from roles:\n"f"```{role_counts}```"),
+            Embed(title=embed_title, description="Reaction counted in which hours:\n"f"```{hours_count}```"),
+            Embed(title=embed_title, description="Reaction counted on which weekday:\n"f"```{weekday_count}```")
+        ]
+        return embeds
+
+    def analyze_botrequests(self):
+        """ANALYZE THE BOT-REQUESTS DATA"""
+        data = self.data["bot_requests"]
+
+        if len(data) == 0:
+            return self.no_data_embed("bot-requests")
+
+        # CONVERT MONGODB JSON DATA TO CSV:
+        csv_col = ["cmdname", "timestamp", "channelid", "roles"]
+        csv_file = f"./src/csv/{self.server_id}_bot_requests.csv"
+        create_csv(csv_file, csv_col, data)
+        # ANALYZE THE DATA:
+        df = pandas.read_csv(f"./src/csv/{self.server_id}_bot_requests.csv")
+        name_count = pandas.value_counts(df["cmdname"])
+        role_counts = pandas.value_counts(df["roles"])
+        channelid_counts = pandas.value_counts(df["channelid"])
+        embed_title = "Bot-Requests ~ Analytics"
+        df["timestamp"] = pandas.to_datetime(df["timestamp"])
+        df["hours"] = df["timestamp"].dt.hour
+        df["weekday"] = df["timestamp"].dt.day_name()
+        hours_count = pandas.value_counts(df["hours"])
+        weekday_count = pandas.value_counts(df["weekday"])
+
+        embeds = [
+            Embed(title=embed_title, description="Here you can see the analyzed bot-requests data"),
+            Embed(title=embed_title, description="Executed CMD-names counted:\n"f"```{name_count}```"),
+            Embed(title=embed_title, description="Bot-Requests messages counted in channels:\n"f"```{channelid_counts}```"),
+            Embed(title=embed_title, description="Bot-Requests messages send from roles:\n"f"```{role_counts}```"),
+            Embed(title=embed_title, description="Bot-Requests counted in which hours:\n"f"```{hours_count}```"),
+            Embed(title=embed_title, description="Bot-Requests counted on which weekday:\n"f"```{weekday_count}```")
+        ]
+        return embeds
+
+    def analyze_botmsg(self):
+        """ANALYZE THE BOT MSG DATA"""
+        data = self.data["bot_msg"]
+
+        if len(data) == 0:
+            return self.no_data_embed("bot-message")
+
+        csv_col = ["msgid", "timestamp", "roles", "channelid"]
+        csv_file = f"./src/csv/{self.server_id}_bot_msg.csv"
+        create_csv(csv_file, csv_col, data)
+        # ANALYZE THE DATA:
+        df = pandas.read_csv(f"./src/csv/{self.server_id}_bot_msg.csv")
+        channelid_counts = pandas.value_counts(df["channelid"])
+        role_counts = pandas.value_counts(df["roles"])
+        df["timestamp"] = pandas.to_datetime(df["timestamp"])
+        df["hours"] = df["timestamp"].dt.hour
+        df["weekday"] = df["timestamp"].dt.day_name()
+        hours_count = pandas.value_counts(df["hours"])
+        weekday_count = pandas.value_counts(df["weekday"])
+
+        embed_title = "Bot-Requests ~ Analytics"
+        embeds = [
+            Embed(title=embed_title, description="Here you can see the analyzed bot-message data"),
+            Embed(title=embed_title, description=f"Total bot messages: {len(data)}"),
+            Embed(title=embed_title, description="BotMessages counted in channels:\n"f"```{channelid_counts}```"),
+            Embed(title=embed_title, description="BotMessages send from roles:\n"f"```{role_counts}```"),
+            Embed(title=embed_title, description="BotMessages send in which hours:\n"f"```{hours_count}```"),
+            Embed(title=embed_title, description="BotMessages send on which day:\n"f"```{weekday_count}```")
+        ]
+        return embeds
+
+    def analyze_userjoin(self):
+        data = self.data["userjoins"]
+
+        if len(data) == 0:
+            return self.no_data_embed("userjoins")
+
+        csv_col = ["timestamp"]
+        csv_file = f"./src/csv/{self.server_id}_userjoin.csv"
+        create_csv(csv_file, csv_col, data)
+        # ANALYZE THE DATA:
+        df = pandas.read_csv(f"./src/csv/{self.server_id}_userjoin.csv")
+        df["timestamp"] = pandas.to_datetime(df["timestamp"])
+        df["hours"] = df["timestamp"].dt.hour
+        df["weekday"] = df["timestamp"].dt.day_name()
+        hours_count = pandas.value_counts(df["hours"])
+        weekday_count = pandas.value_counts(df["weekday"])
+
+        embed_title = "Bot-Requests ~ Analytics"
+        embeds = [
+            Embed(title=embed_title, description="Here you can see the analyzed message data"),
+            Embed(title=embed_title, description="Userjoins counted in channels:\n"f"```{hours_count}```"),
+            Embed(title=embed_title, description="Userjoins send from roles:\n"f"```{weekday_count}```")
+        ]
+        return embeds
+
+    def analyze_userleave(self):
+        data = self.data["userleave"]
+
+        if len(data) == 0:
+            return self.no_data_embed("userleave")
+
+        csv_col = ["timestamp"]
+        csv_file = f"./src/csv/{self.server_id}_userleave.csv"
+        create_csv(csv_file, csv_col, data)
+        # ANALYZE THE DATA:
+        df = pandas.read_csv(f"./src/csv/{self.server_id}_userleave.csv")
+        df["timestamp"] = pandas.to_datetime(df["timestamp"])
+        df["hours"] = df["timestamp"].dt.hour
+        df["weekday"] = df["timestamp"].dt.day_name()
+        hours_count = pandas.value_counts(df["hours"])
+        weekday_count = pandas.value_counts(df["weekday"])
+
+        embed_title = "Bot-Requests ~ Analytics"
+
+        embeds = [
+            Embed(title=embed_title, description="Here you can see the analyzed message data"),
+            Embed(title=embed_title, description="Userleaves counted in which hour:\n"f"```{hours_count}```"),
+            Embed(title=embed_title, description="Userleaves counted on which weekday:\n"f"```{weekday_count}```")
+        ]
+        return embeds
+
+    def analyze_mentions(self):
+        data = self.data["mentions"]
+
+        if len(data) == 0:
+            return self.no_data_embed("mentions")
+
+        csv_col = ["ment_role", "timestamp", "roles", "channelid"]
+        csv_file = f"./src/csv/{self.server_id}_mentions.csv"
+        create_csv(csv_file, csv_col, data)
+        # ANALYZE THE DATA:
+        df = pandas.read_csv(f"./src/csv/{self.server_id}_mentions.csv")
+        ment_roles_counts = pandas.value_counts(df["ment_role"])
+        role_counts = pandas.value_counts(df["roles"])
+        channelid_counts = pandas.value_counts(df["channelid"])
+        df["timestamp"] = pandas.to_datetime(df["timestamp"])
+        df["hours"] = df["timestamp"].dt.hour
+        df["weekday"] = df["timestamp"].dt.day_name()
+        hours_count = pandas.value_counts(df["hours"])
+        weekday_count = pandas.value_counts(df["weekday"])
+
+        embed_title = "Bot-Requests ~ Analytics"
+
+        embeds = [
+            Embed(title=embed_title, description="Here you can see the analyzed mentions data"),
+            Embed(title=embed_title, description="Mentions counted in channels:\n"f"```{channelid_counts}```"),
+            Embed(title=embed_title, description="Mentions send from roles:\n"f"```{role_counts}```"),
+            Embed(title=embed_title, description="Roles mentioned:\n"f"```{ment_roles_counts}```"),
+            Embed(title=embed_title, description="Mentions counted in which hour:\n"f"```{hours_count}```"),
+            Embed(title=embed_title, description="Mentions counted on which weekday:\n"f"```{weekday_count}```")
         ]
         return embeds
