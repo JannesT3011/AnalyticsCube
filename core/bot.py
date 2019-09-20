@@ -3,7 +3,7 @@ from discord import utils
 from core.database import DbClient
 from CONFIG import TOKEN
 
-COGS = ["dataminer.message", "dataminer.reaction", "dataminer.member", "util.guild_event", "cogs.stats", "cogs.analysis"]
+COGS = ["dataminer.message", "dataminer.reaction", "dataminer.member", "util.guild_event", "cogs.stats", "cogs.analysis", "cogs.help"]
 
 
 async def run():
