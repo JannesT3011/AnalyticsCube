@@ -8,10 +8,11 @@ class Help(commands.Cog):
 
     @commands.command(name="help")
     async def _help(self, ctx):
-        cat = ["`message`", "`reaction`", "`bot-requests`", "``userjoins", "`userlaves`", "`mentions`", "`bot-msg`"]
+        cat = ["`message`", "`reaction`", "`bot-requests`", "`userjoins`", "`userlaves`", "`mentions`", "`bot-msg`"]
         embed = Embed(title=f"{self.bot.user.name} ~ Help")
         embed.add_field(name="`stats`", value="Shows general stats", inline=False),
-        embed.add_field(name="`analyze`", value="Analyze a specific category:\n"f" \n".join(cat))
+        embed.add_field(name="`analyze`", value="Analyze a specific category", inline=False)
+        embed.add_field(name="`analyze` ~ categories", value="\n".join(cat))
 
         return await ctx.send(embed=embed)
 
