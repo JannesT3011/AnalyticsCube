@@ -16,6 +16,13 @@ class Error(commands.Cog):
             """MISSING PERMISSIONS ERROR"""
             embed = Embed(title="Oops..", description="Sorry, but you don't have enough permissions to execute this command!")
             return await ctx.send(embed=embed)
+        elif isinstance(error, commands.BotMissingPermissions):
+            owner = ctx.guild.owner_id
+            embed = Embed(title="Oops..", description="Sorry, but I can't send messages on your server, because I don't have enough permissions!")
+            return await owner.send(embed=embed)
+        elif isinstance(error, commands.CommandNotFound):
+            embed = Embed(title="Oops..", description=f"This command doesnt exist! Try `{self.bot.command_prefix}help` to see all commands")
+            return await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Error(bot))
