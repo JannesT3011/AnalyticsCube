@@ -23,6 +23,9 @@ class Error(commands.Cog):
         elif isinstance(error, commands.CommandNotFound):
             embed = Embed(title="Oops..", description=f"This command doesnt exist! Try `{self.bot.command_prefix}help` to see all commands")
             return await ctx.send(embed=embed)
+        elif isinstance(error, commands.CheckFailure):
+            embed = Embed(title="Oops...", description="It seems like you arn't allowed to execute this command.,")
+            return await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Error(bot))
