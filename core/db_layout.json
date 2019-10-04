@@ -1,0 +1,26 @@
+{
+  "_id": {
+    "guild_id": "",
+    "message": [
+      {"msgid":  {"timestamp":  "", "channelid":  "", "msgid":  "", "roleid":  ""}}
+    ],
+    "status": [
+      {"status_name":  {"timestamp":  "", "roleid":  ""}}
+    ],
+    "reaction": [
+      {"reactionid":  {"timestamp":  "", "channelid":  "", "roleid":  ""}}
+    ],
+    "bot_requests": [
+      {"cmd_name":  {"timestamp":  "", "channelid":  "", "roleid":  ""}}
+    ],
+    "userjoins": [
+      {"timestamp":  ""}
+    ],
+    "userleave": [
+      {"timestamp":  ""}
+    ],
+    "mentions": [
+      {"timestamp":  "", "ment_id":  "", "roleid": "", "channelid":  ""}
+    ]
+  }
+}

@@ -2,7 +2,6 @@ from core import DbClient
 from discord import Embed
 import pandas
 from util.create_csv import create_csv
-from dataminer import today, month, year
 
 
 class Analytics:
@@ -218,7 +217,7 @@ class Analytics:
         hours_count = pandas.value_counts(df["hours"])
         weekday_count = pandas.value_counts(df["weekday"])
 
-        embed_title = "Bot-Requests ~ Analytics"
+        embed_title = "Mentions ~ Analytics"
 
         embeds = [
             Embed(title=embed_title, description="Here you can see the analyzed mentions data"),

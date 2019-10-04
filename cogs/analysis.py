@@ -42,7 +42,7 @@ class Analysis(commands.Cog):
 
     @commands.is_owner()
     @commands.cooldown(1, 10.0, commands.BucketType.user)
-    @_analyze.command(name="userjoins")
+    @_analyze.command(name="userjoins", aliases=["userjoin"])
     async def _analyze_userjoins(self, ctx):
         msg = Analytics(str(ctx.guild.id)).analyze_userjoin()
         paginator = BotEmbedPaginator(ctx, msg)
@@ -51,7 +51,7 @@ class Analysis(commands.Cog):
 
     @commands.is_owner()
     @commands.cooldown(1, 10.0, commands.BucketType.user)
-    @_analyze.command(name="userleaves")
+    @_analyze.command(name="userleaves", aliases=["userleave"])
     async def _analyze_userleaves(self, ctx):
         msg = Analytics(str(ctx.guild.id)).analyze_userleave()
         paginator = BotEmbedPaginator(ctx, msg)
@@ -60,7 +60,7 @@ class Analysis(commands.Cog):
 
     @commands.is_owner()
     @commands.cooldown(1, 10.0, commands.BucketType.user)
-    @_analyze.command(name="mentions")
+    @_analyze.command(name="mentions", aliases=["mention"])
     async def _analyze_mentions(self, ctx):
         msg = Analytics(str(ctx.guild.id)).analyze_mentions()
         paginator = BotEmbedPaginator(ctx, msg)

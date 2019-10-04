@@ -2,9 +2,7 @@ from discord.ext import commands
 from discord import utils
 from core.database import DbClient
 from CONFIG import TOKEN
-
-COGS = ["dataminer.message", "dataminer.reaction", "dataminer.member", "util.guild_event", "cogs.stats", "cogs.analysis", "cogs.help", "util.error"]
-
+from .cogs import COGS
 
 async def run():
     bot = Bot()
