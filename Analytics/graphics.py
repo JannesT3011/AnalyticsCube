@@ -4,6 +4,7 @@ import numpy as np
 
 
 def create_plot(name:str, guild_id:str):
+    # CREATES A PLOT
     df = pd.read_csv(f"./src/csv/{guild_id}_{name}.csv")
     df["timestamp"] = pd.to_datetime(df["timestamp"])
     df["hours"] = df["timestamp"].dt.hour

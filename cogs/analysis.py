@@ -20,6 +20,7 @@ class Analysis(commands.Cog):
         msg = Analytics(str(ctx.guild.id)).analyze_message()
         paginator = BotEmbedPaginator(ctx, msg)
         bot_requests(ctx.message, str(ctx.command), self.bot.db)
+        await ctx.trigger_typing()
         return await paginator.run()
 
     @commands.is_owner()
@@ -29,6 +30,7 @@ class Analysis(commands.Cog):
         msg = Analytics(str(ctx.guild.id)).analyze_reaction()
         paginator = BotEmbedPaginator(ctx, msg)
         bot_requests(ctx.message, str(ctx.command), self.bot.db)
+        await ctx.trigger_typing()
         return await paginator.run()
 
     @commands.is_owner()
@@ -38,6 +40,7 @@ class Analysis(commands.Cog):
         msg = Analytics(str(ctx.guild.id)).analyze_botrequests()
         paginator = BotEmbedPaginator(ctx, msg)
         bot_requests(ctx.message, str(ctx.command), self.bot.db)
+        await ctx.trigger_typing()
         return await paginator.run()
 
     @commands.is_owner()
@@ -47,6 +50,7 @@ class Analysis(commands.Cog):
         msg = Analytics(str(ctx.guild.id)).analyze_userjoin()
         paginator = BotEmbedPaginator(ctx, msg)
         bot_requests(ctx.message, str(ctx.command), self.bot.db)
+        await ctx.trigger_typing()
         return await paginator.run()
 
     @commands.is_owner()
@@ -56,6 +60,7 @@ class Analysis(commands.Cog):
         msg = Analytics(str(ctx.guild.id)).analyze_userleave()
         paginator = BotEmbedPaginator(ctx, msg)
         bot_requests(ctx.message, str(ctx.command), self.bot.db)
+        await ctx.trigger_typing()
         return await paginator.run()
 
     @commands.is_owner()
@@ -65,6 +70,7 @@ class Analysis(commands.Cog):
         msg = Analytics(str(ctx.guild.id)).analyze_mentions()
         paginator = BotEmbedPaginator(ctx, msg)
         bot_requests(ctx.message, str(ctx.command), self.bot.db)
+        await ctx.trigger_typing()
         return await paginator.run()
 
     @commands.is_owner()
@@ -74,6 +80,7 @@ class Analysis(commands.Cog):
         msg = Analytics(str(ctx.guild.id)).analyze_botmsg()
         paginator = BotEmbedPaginator(ctx, msg)
         bot_requests(ctx.message, str(ctx.command), self.bot.db)
+        await ctx.trigger_typing()
         return await paginator.run()
 
 def setup(bot):

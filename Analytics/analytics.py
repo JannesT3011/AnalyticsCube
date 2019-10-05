@@ -1,7 +1,7 @@
 from core import DbClient
 from discord import Embed
 import pandas
-from util.create_csv import create_csv
+from util.create_csv import CSV
 
 
 class Analytics:
@@ -24,9 +24,7 @@ class Analytics:
             return self.no_data_embed("message")
 
         # CONVERT MONGODB JSON DATA TO CSV:
-        csv_col = ["msgid", "timestamp", "roles", "channelid"]
-        csv_file = f"./src/csv/{self.server_id}_message.csv"
-        create_csv(csv_file, csv_col, data)
+        CSV(self.server_id, data).create_csv("message")
 
         # ANALYZE THE DATA:
         df = pandas.read_csv(f"./src/csv/{self.server_id}_message.csv")
@@ -56,9 +54,7 @@ class Analytics:
             return self.no_data_embed("reaction")
 
         # CONVERT MONGODB JSON DATA TO CSV:
-        csv_col = ["reactionname", "timestamp", "roles", "channelid"]
-        csv_file = f"./src/csv/{self.server_id}_reaction.csv"
-        create_csv(csv_file, csv_col, data)
+        CSV(self.server_id, data).create_csv("reaction")
 
         # ANALYZE THE DATA:
         df = pandas.read_csv(f"./src/csv/{self.server_id}_reaction.csv")
@@ -90,9 +86,7 @@ class Analytics:
             return self.no_data_embed("bot-requests")
 
         # CONVERT MONGODB JSON DATA TO CSV:
-        csv_col = ["cmdname", "timestamp", "channelid", "roles"]
-        csv_file = f"./src/csv/{self.server_id}_bot_requests.csv"
-        create_csv(csv_file, csv_col, data)
+        CSV(self.server_id, data).create_csv("bot_requests")
         # ANALYZE THE DATA:
         df = pandas.read_csv(f"./src/csv/{self.server_id}_bot_requests.csv")
         name_count = pandas.value_counts(df["cmdname"])
@@ -122,9 +116,9 @@ class Analytics:
         if len(data) == 0:
             return self.no_data_embed("bot-message")
 
-        csv_col = ["msgid", "timestamp", "roles", "channelid"]
-        csv_file = f"./src/csv/{self.server_id}_bot_msg.csv"
-        create_csv(csv_file, csv_col, data)
+        # CONVERT MONGODB JSON DATA TO CSV:
+        CSV(self.server_id, data).create_csv("bot_msg")
+
         # ANALYZE THE DATA:
         df = pandas.read_csv(f"./src/csv/{self.server_id}_bot_msg.csv")
         channelid_counts = pandas.value_counts(df["channelid"])
@@ -152,9 +146,9 @@ class Analytics:
         if len(data) == 0:
             return self.no_data_embed("userjoins")
 
-        csv_col = ["timestamp"]
-        csv_file = f"./src/csv/{self.server_id}_userjoin.csv"
-        create_csv(csv_file, csv_col, data)
+        # CONVERT MONGODB JSON DATA TO CSV:
+        CSV(self.server_id, data).create_csv("userjoin")
+
         # ANALYZE THE DATA:
         df = pandas.read_csv(f"./src/csv/{self.server_id}_userjoin.csv")
         df["timestamp"] = pandas.to_datetime(df["timestamp"])
@@ -177,9 +171,9 @@ class Analytics:
         if len(data) == 0:
             return self.no_data_embed("userleave")
 
-        csv_col = ["timestamp"]
-        csv_file = f"./src/csv/{self.server_id}_userleave.csv"
-        create_csv(csv_file, csv_col, data)
+        # CONVERT MONGODB JSON DATA TO CSV:
+        CSV(self.server_id, data).create_csv("userleave")
+
         # ANALYZE THE DATA:
         df = pandas.read_csv(f"./src/csv/{self.server_id}_userleave.csv")
         df["timestamp"] = pandas.to_datetime(df["timestamp"])
@@ -203,9 +197,10 @@ class Analytics:
         if len(data) == 0:
             return self.no_data_embed("mentions")
 
-        csv_col = ["ment_role", "timestamp", "roles", "channelid"]
-        csv_file = f"./src/csv/{self.server_id}_mentions.csv"
-        create_csv(csv_file, csv_col, data)
+        # CONVERT MONGODB JSON DATA TO CSV:
+        print(True)
+        CSV(self.server_id, data).create_csv("mentions")
+
         # ANALYZE THE DATA:
         df = pandas.read_csv(f"./src/csv/{self.server_id}_mentions.csv")
         ment_roles_counts = pandas.value_counts(df["ment_role"])
