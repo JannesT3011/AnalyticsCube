@@ -13,7 +13,7 @@ Data that will be collected:
 - `counts reactions` -> which reaction is used most
 - `counts mentions`
 
-# Commands
+# Commands (help)
 
 Creates an embed in which the analyzed data of each category will shown
 - `analyze message`
