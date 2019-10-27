@@ -12,7 +12,8 @@ class CSV:
             "bot_msg": ["msgid", "timestamp", "roles", "channelid"],
             "userjoin": ["timestamp"],
             "userleave": ["timestamp"],
-            "mentions": ["ment_role", "timestamp", "roles", "channelid"]
+            "mentions": ["ment_role", "timestamp", "roles", "channelid"],
+            "status": ["game", "timestamp", "roles"]
         }
 
     def create_csv(self, name):

@@ -1,6 +1,7 @@
 COGS = ["dataminer.message",
         "dataminer.reaction",
         "dataminer.member",
+        "dataminer.status",
         "util.guild_event",
         "cogs.stats",
         "cogs.analysis",

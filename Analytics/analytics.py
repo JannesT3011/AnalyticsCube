@@ -129,7 +129,7 @@ class Analytics:
         hours_count = pandas.value_counts(df["hours"])
         weekday_count = pandas.value_counts(df["weekday"])
 
-        embed_title = "Bot-Requests ~ Analytics"
+        embed_title = "Bot-Message ~ Analytics"
         embeds = [
             Embed(title=embed_title, description="Here you can see the analyzed bot-message data"),
             Embed(title=embed_title, description=f"Total bot messages: {len(data)}"),
@@ -157,7 +157,7 @@ class Analytics:
         hours_count = pandas.value_counts(df["hours"])
         weekday_count = pandas.value_counts(df["weekday"])
 
-        embed_title = "Bot-Requests ~ Analytics"
+        embed_title = "Userjoin ~ Analytics"
         embeds = [
             Embed(title=embed_title, description="Here you can see the analyzed message data"),
             Embed(title=embed_title, description="Userjoins counted in channels:\n"f"```{hours_count}```"),
@@ -182,7 +182,7 @@ class Analytics:
         hours_count = pandas.value_counts(df["hours"])
         weekday_count = pandas.value_counts(df["weekday"])
 
-        embed_title = "Bot-Requests ~ Analytics"
+        embed_title = "Userleave ~ Analytics"
 
         embeds = [
             Embed(title=embed_title, description="Here you can see the analyzed message data"),
@@ -193,12 +193,11 @@ class Analytics:
 
     def analyze_mentions(self):
         data = self.data["mentions"]
-
+        print(data)
         if len(data) == 0:
             return self.no_data_embed("mentions")
 
         # CONVERT MONGODB JSON DATA TO CSV:
-        print(True)
         CSV(self.server_id, data).create_csv("mentions")
 
         # ANALYZE THE DATA:
@@ -221,5 +220,35 @@ class Analytics:
             Embed(title=embed_title, description="Roles mentioned:\n"f"```{ment_roles_counts}```"),
             Embed(title=embed_title, description="Mentions counted in which hour:\n"f"```{hours_count}```"),
             Embed(title=embed_title, description="Mentions counted on which weekday:\n"f"```{weekday_count}```")
+        ]
+        return embeds
+
+    def analyze_status(self):
+        data = self.data["status"]
+
+        if len(data) == 0:
+            return self.no_data_embed("status")
+
+        # CONVERT MONGODB JSON DATA TO CSV:
+        CSV(self.server_id, data).create_csv("status")
+
+        # ANALYZE THE DATA:
+        df = pandas.read_csv(f"./src/csv/{self.server_id}_status.csv")
+        df["timestamp"] = pandas.to_datetime(df["timestamp"])
+        df["hours"] = df["timestamp"].dt.hour
+        df["weekday"] = df["timestamp"].dt.day_name()
+        hours_count = pandas.value_counts(df["hours"])
+        weekday_count = pandas.value_counts(df["weekday"])
+        game_counts = pandas.value_counts(df["game"])
+        role_counts = pandas.value_counts(df["roles"])
+
+        embed_title = "Status/Game ~ Analytics"
+
+        embeds = [
+            Embed(title=embed_title, description="Here you can see the analyzed message data"),
+            Embed(title=embed_title, description="Which games play the most:\n"f"```{game_counts}```"),
+            Embed(title=embed_title, description="Game played from which roles:\n"f"```{role_counts}```"),
+            Embed(title=embed_title, description="Game counted in which hour:\n"f"```{hours_count}```"),
+            Embed(title=embed_title, description="Game counted on which weekday:\n"f"```{weekday_count}```")
         ]
         return embeds

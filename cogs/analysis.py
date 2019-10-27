@@ -83,5 +83,16 @@ class Analysis(commands.Cog):
         await ctx.trigger_typing()
         return await paginator.run()
 
+    @commands.is_owner()
+    @commands.cooldown(1, 10.0, commands.BucketType.user)
+    @_analyze.command(name="status", aliases=["game"])
+    async def _analyze_status(self, ctx):
+        msg = Analytics(str(ctx.guild.id)).analyze_status()
+        paginator = BotEmbedPaginator(ctx, msg)
+        bot_requests(ctx.message, str(ctx.command), self.bot.db)
+        await ctx.trigger_typing()
+        return await paginator.run()
+
+
 def setup(bot):
     bot.add_cog(Analysis(bot))
