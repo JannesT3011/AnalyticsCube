@@ -107,5 +107,18 @@ class Plot(commands.Cog):
         await ctx.trigger_typing()
         return await ctx.send(file=img)
 
+    @commands.is_owner()
+    @commands.cooldown(1, 10.0, commands.BucketType.user)
+    @_plot.command(name="status", aliases=["game"])
+    async def _plot_status(self, ctx):
+        bot_requests(ctx.message, str(ctx.command), self.bot.db)
+
+        data = self.data["status"]
+        CSV(self.server_id, data).create_csv("status")
+        create_plot("status", str(ctx.guild.id))
+        img = discord.File(f"./src/img/{str(ctx.guild.id)}_status.png")
+        await ctx.trigger_typing()
+        return await ctx.send(file=img)
+
 def setup(bot):
     bot.add_cog(Plot(bot))
