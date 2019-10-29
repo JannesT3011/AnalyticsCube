@@ -1,26 +1,12 @@
 {
-  "_id": {
-    "guild_id": "",
-    "message": [
-      {"msgid":  {"timestamp":  "", "channelid":  "", "msgid":  "", "roleid":  ""}}
-    ],
-    "status": [
-      {"status_name":  {"timestamp":  "", "roleid":  ""}}
-    ],
-    "reaction": [
-      {"reactionid":  {"timestamp":  "", "channelid":  "", "roleid":  ""}}
-    ],
-    "bot_requests": [
-      {"cmd_name":  {"timestamp":  "", "channelid":  "", "roleid":  ""}}
-    ],
-    "userjoins": [
-      {"timestamp":  ""}
-    ],
-    "userleave": [
-      {"timestamp":  ""}
-    ],
-    "mentions": [
-      {"timestamp":  "", "ment_id":  "", "roleid": "", "channelid":  ""}
-    ]
-  }
+  "_id": "SERVER_ID",
+  "message": [],
+  "status": [],
+  "reaction": [],
+  "bot_requests": [],
+  "userjoins": [],
+  "userleave": [],
+  "mentions": [],
+  "bot_msg": [],
+  "server_join": "TIMESTAMP"
 }
