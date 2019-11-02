@@ -32,15 +32,15 @@ class Set(commands.Cog):
         await ctx.send("React with 👌 to change the prefix!")
 
         def check(reaction, user):
-            return user == ctx.author and str(reaction.emoji) == "👌👌👌👌👌👌👌👌👌"
+            return user == ctx.author and str(reaction.emoji) == "👌"
 
         try:
             reaction, user = await self.bot.wait_for("reaction_add", timeout=30.0, check=check)
         except asyncio.TimeoutError:
             return await ctx.send("Seems like you don't want to change the prefix, try again later!")
-
-        embed = discord.Embed(title=f"`{prefix}` successfully added to Server prefix list")
-        await ctx.send(embed=embed)
+        else:
+            embed = discord.Embed(title=f"Server-prefix changed to: `{prefix}`!")
+            await ctx.send(embed=embed)
 
 
 def setup(bot):
