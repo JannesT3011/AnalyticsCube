@@ -19,8 +19,19 @@ class Set(commands.Cog):
     @_set.command(name="game")
     async def _set_game(self, ctx, *, game_name: str):
         """SET BOT GAME"""
-        await self.bot.change_presence(game=discord.Game(name=game_name))
-        await ctx.send(f"Game changed to: `{game_name}`")
+        await ctx.send(f"React with 👌 to change the game to `{game_name}`!")
+
+        def check(reaction, user):
+            return user == ctx.author and str(reaction.emoji) == "👌"
+
+        try:
+            reaction, user = await self.bot.wait_for("reaction_add", timeout=30.0, check=check)
+        except asyncio.TimeoutError:
+            return await ctx.send("Sees like you don't want to change the prefix, try again later!")
+        else:
+            await self.bot.change_presence(activity=discord.Game(name=game_name))
+            embed = discord.Embed(title=f"Bot-game changed to: `{game_name}`!")
+            return await ctx.send(embed=embed)
 
     @commands.is_owner()
     @commands.cooldown(1, 10.0, commands.BucketType.user)
@@ -40,7 +51,7 @@ class Set(commands.Cog):
             return await ctx.send("Seems like you don't want to change the prefix, try again later!")
         else:
             embed = discord.Embed(title=f"Server-prefix changed to: `{prefix}`!")
-            await ctx.send(embed=embed)
+            return await ctx.send(embed=embed)
 
 
 def setup(bot):
