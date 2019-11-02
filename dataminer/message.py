@@ -3,6 +3,7 @@ from datetime import datetime
 from . import utcnow
 from . import bot_requests, bot_messages
 from . import mentions_data
+from CONFIG import DEFAULT_PREFIX
 
 """
 COLLECT DATA FROM MESSAGES !
@@ -11,6 +12,13 @@ COLLECT DATA FROM MESSAGES !
 class Message(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    def prefix(self, server_id: str):
+        pr_list = self.bot.db.find({"_id": server_id})
+        for pr in pr_list:
+            prefix = pr["prefix"]
+
+        return (prefix, DEFAULT_PREFIX, f"<@{self.bot.user.id}>")
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -24,7 +32,7 @@ class Message(commands.Cog):
         if len(message.role_mentions) > 0:
             mentions_data(message, self.bot.db)
             return
-        if message.content.startswith(self.bot.command_prefix):
+        if message.content.startswith(self.prefix(str(message.guild.id))):
             return
         # count messages here
         _roles = []

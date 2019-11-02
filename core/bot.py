@@ -1,8 +1,19 @@
 from discord.ext import commands
 from discord import utils
 from core.database import DbClient
-from CONFIG import TOKEN
+from CONFIG import TOKEN, DEFAULT_PREFIX
 from .cogs import COGS
+
+
+def get_prefix(bot, message):
+    if not message.guild:
+        return commands.when_mentioned_or(DEFAULT_PREFIX)(bot, message)
+
+    pr_list = bot.db.find({"_id": str(message.guild.id)})
+    for pr in pr_list:
+        prefix = pr["prefix"]
+
+    return commands.when_mentioned_or(prefix, DEFAULT_PREFIX)(bot, message)
 
 async def run():
     bot = Bot()
@@ -16,7 +27,7 @@ async def run():
 class Bot(commands.AutoShardedBot):
     def __init__(self, **kwargs):
         super(Bot, self).__init__(
-            command_prefix="_",
+            command_prefix=get_prefix,
             description="A discord bot that analyze your discord server"
         )
         self.launch = __import__("datetime").datetime.utcnow()

@@ -40,7 +40,8 @@ def db_layout(guildid: str):
                     "userleave": [],
                     "mentions": [],
                     "bot_msg": [],
-                    "server_join": utcnow
+                    "server_join": utcnow,
+                    "prefix": ""
                     }
 
     return default_data

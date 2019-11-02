@@ -7,4 +7,6 @@ COGS = ["dataminer.message",
         "cogs.analysis",
         "cogs.help",
         "util.error",
-        "cogs.plot"]
+        "cogs.plot",
+        "cogs.config.set",
+        "cogs.config.db"]

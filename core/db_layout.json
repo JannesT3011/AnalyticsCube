@@ -8,5 +8,6 @@
   "userleave": [],
   "mentions": [],
   "bot_msg": [],
-  "server_join": "TIMESTAMP"
+  "server_join": "TIMESTAMP",
+  "prefix": ""
 }
