@@ -9,4 +9,5 @@ COGS = ["dataminer.message",
         "util.error",
         "cogs.plot",
         "cogs.config.set",
-        "cogs.config.db"]
+        "cogs.config.db",
+        "cogs.config.prefix"]

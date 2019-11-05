@@ -2,6 +2,7 @@ from discord.ext import commands
 from . import is_bot_owner
 import discord
 import asyncio
+from dataminer import bot_requests
 
 class Set(commands.Cog):
     def __init__(self, bot):
@@ -12,13 +13,20 @@ class Set(commands.Cog):
     @commands.group(name="set")
     async def _set(self, ctx):
         """RETURN ALL AVAILABLE SET FUNCTIONS"""
-        return
+        bot_requests(ctx.message, str(ctx.command), self.bot.db)
+
+        embed = discord.Embed(title="`Set` commands")
+        embed.add_field(name="`set game <NAME>`", value="Set the game/status of the bot", inline=False)
+        embed.add_field(name="`set prefix <PREFIX>`", value="Set the server prefix", inline=False)
+        return await ctx.send(embed=embed)
 
     @is_bot_owner()
     @commands.cooldown(1, 10.0, commands.BucketType.user)
     @_set.command(name="game")
     async def _set_game(self, ctx, *, game_name: str):
         """SET BOT GAME"""
+        bot_requests(ctx.message, str(ctx.command), self.bot.db)
+
         await ctx.send(f"React with 👌 to change the game to `{game_name}`!")
 
         def check(reaction, user):
@@ -38,6 +46,8 @@ class Set(commands.Cog):
     @_set.command(name="prefix")
     async def _set_prefix(self, ctx, *, prefix: str):
         """SET A SERVER PREFIX"""
+        bot_requests(ctx.message, str(ctx.command), self.bot.db)
+
         self.bot.db.update({"_id": str(ctx.guild.id)}, {"$set": {"prefix": prefix}})
 
         await ctx.send("React with 👌 to change the prefix!")
