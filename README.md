@@ -1,7 +1,13 @@
 # DiscordAnalytica
 A discord bot that analyze your discord server 
 
-Data that will be collected:
+# About
+This bot fetches [data](https://github.com/Bmbus/DiscordAnalytica#Collected-Data) which will be safed in a MongoDb Database, you created!
+Now you can see the data by using the [commands](https://github.com/Bmbus/DiscordAnalytica#commands-help). Data will be showed as plot or text-embed - debends on the command you use.
+See examples [here](https://github.com/Bmbus/DiscordAnalytica#Examples)
+
+
+# Collected Data
 
 - `timestamp`-> what is used in which time
 - `messageID`
@@ -12,6 +18,7 @@ Data that will be collected:
 - `counts bot messages` -> bot requests
 - `counts reactions` -> which reaction is used most
 - `counts mentions`
+NOTE: Private stuff such as passwords, mails or your ID won't collected!
 
 # Commands (help)
 
@@ -34,4 +41,10 @@ Creates a plot to each category
 - `plot botmsg`
 
 
-Better readme is coming soon
+# Examples
+
+For `analyze` commands:
+![EXAMPLE-EMBED](https://github.com/Bmbus/DiscordAnalytica/tree/master/examples/example_embed.png)
+
+For `plot` commands:
+![EXAMPLE-PLOT](https://github.com/Bmbus/DiscordAnalytica/tree/master/examples/example_plot.png)
