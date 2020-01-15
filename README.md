@@ -44,7 +44,13 @@ Creates a plot to each category
 # Examples
 
 For `analyze` commands:
+<br>
+
+
 <img src="https://raw.githubusercontent.com/Bmbus/DiscordAnalytica/master/examples/example_embed.png" alt="EXAMPLE-PLOT"> 
 
 For `plot` commands:
+<br>
+
+
 <img src="https://raw.githubusercontent.com/Bmbus/DiscordAnalytica/master/examples/example_plot.png" alt="EXAMPLE-PLOT"> 
