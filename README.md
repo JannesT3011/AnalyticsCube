@@ -40,6 +40,10 @@ Creates a plot to each category
 - `plot mentions`
 - `plot botmsg`
 
+Other commands (general)
+- `stats` -> general server stats
+- `prefix` -> show server prefix
+- `set` -> configure the bot - set the status and prefix
 
 # Examples
 
