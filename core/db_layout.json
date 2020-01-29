@@ -9,5 +9,6 @@
   "mentions": [],
   "bot_msg": [],
   "server_join": "TIMESTAMP",
-  "prefix": ""
+  "prefix": "",
+  "other_prefix": []
 }
