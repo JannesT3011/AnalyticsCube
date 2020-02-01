@@ -15,6 +15,7 @@ class DbClient:
 
 
 class Database(DbClient):
+    """EXECUTE DATABASE STUFF"""
     def init_db(self, guildid: str):
         try:
             self.collection.insert_one(db_layout(guildid))
@@ -31,6 +32,7 @@ class Database(DbClient):
 
 
 def db_layout(guildid: str):
+    """DEFAULT DATABASE LAYOUT"""
     default_data = {"_id": guildid,
                     "message": [],
                     "status": [],
@@ -41,7 +43,8 @@ def db_layout(guildid: str):
                     "mentions": [],
                     "bot_msg": [],
                     "server_join": utcnow,
-                    "prefix": ""
+                    "prefix": "",
+                    "other_prefix": []
                     }
 
     return default_data
