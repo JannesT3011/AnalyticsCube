@@ -1,3 +1,3 @@
 # AnalyticsCube
 
-<img src="https://raw.githubusercontent.com/Bmbus/DiscordAnalytica/blob/rewrite/examples/botlogo.png" alt="EXAMPLE-PLOT"> 
+<img src="https://github.com/JannesT3011/DiscordAnalytica/blob/rewrite/botlogo.png" alt="EXAMPLE-PLOT"> 
