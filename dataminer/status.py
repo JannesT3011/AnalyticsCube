@@ -15,10 +15,12 @@ class Status(commands.Cog):
         if before.nick != after.nick:
             push_data = {"timestamp": utcnow, "roles": roles}
             await self.bot.db.update_many({"_id": str(after.guild.id)}, {"$push": {"user_nickchange": push_data}})
-
-        if isinstance(after.activities[0], discord.Spotify):
-            push_data = {"timestamp": utcnow, "game": "spotify", "roles": roles}
-            await self.bot.db.update_many({"_id": str(after.guild.id)}, {"$push": {"status": push_data}})
+        try:
+            if isinstance(after.activities[0], discord.Spotify):
+                push_data = {"timestamp": utcnow, "game": "spotify", "roles": roles}
+                await self.bot.db.update_many({"_id": str(after.guild.id)}, {"$push": {"status": push_data}})
+        except IndexError:
+            pass
 
         if isinstance(after.activities[0], discord.Game):
             game = after.activities[0].name

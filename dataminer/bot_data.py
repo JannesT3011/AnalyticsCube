@@ -16,6 +16,6 @@ async def bot_messages(message: discord.message.Message, db):
     _roles = []
     for role in message.author.roles:
         _roles.append(str(role))
-    push_data = {"msgid": str(message.id), "timestamp": utcnow, "roles": _roles, "channelid": str(message.channel.id)}
+    push_data = {"timestamp": utcnow, "roles": _roles, "channelid": str(message.channel.id)}
     await db.update_many({"_id": str(message.guild.id)}, {"$push": {"bot_msg": push_data}})
     return

@@ -17,10 +17,10 @@ class Message(commands.Cog):
             return
         if message.author.bot:
             # TODO count bot messages
-            bot_messages(message, self.bot.db)
+            await bot_messages(message, self.bot.db)
             return
         if len(message.role_mentions) > 0:
-            mentions_data(message, self.bot.db)
+            await mentions_data(message, self.bot.db)
             return
         if message.content.startswith("da."):
             return
@@ -28,7 +28,7 @@ class Message(commands.Cog):
         for role in message.author.roles:
             roles.append(str(role))
 
-        push_data = {"msgid": str(message.id), "timestamp": utcnow, "roles": roles, "channelid": str(message.channel.id), "attachments": True if len(message.attachments) > 0 else False}
+        push_data = {"timestamp": utcnow, "roles": roles, "channelid": str(message.channel.id), "attachments": True if len(message.attachments) > 0 else False}
         await self.bot.db.update_many({"_id": str(message.guild.id)}, {"$push": {"message": push_data}})
         return
     
@@ -37,7 +37,7 @@ class Message(commands.Cog):
         roles = []
         for role in after.author.roles:
             roles.append(str(role))
-        push_data = {"timestamp": utcnow, "roles": roles}
+        push_data = {"timestamp": utcnow, "roles": roles, "channelid": after.channel.id}
         await self.bot.db.update_many({"_id": str(after.guild.id)}, {"$push": {"message_edit": push_data}})
         return
     
@@ -46,7 +46,7 @@ class Message(commands.Cog):
         roles = []
         for role in message.author.roles:
             roles.append(str(role))
-        push_data = {"timestamp": utcnow, "roles": roles}
+        push_data = {"timestamp": utcnow, "roles": roles, "channelid": message.channel.id}
         await self.bot.db.update_many({"_id": str(message.guild.id)}, {"$push": {"message_delete": push_data}})
         return
 

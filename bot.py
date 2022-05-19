@@ -3,9 +3,16 @@ from discord.ext import commands
 from discord import utils
 from config import TOKEN
 import datetime
-#from database.database import DbClient
+from database.database import DbClient, Database
 
-COGS = []
+COGS = [
+    "dataminer.guild",
+    "dataminer.member",
+    "dataminer.message",
+    "dataminer.reactions",
+    "dataminer.status",
+    "dataminer.voice"
+]
 
 class Bot(commands.AutoShardedBot):
     def __init__(self, **kwargs):
@@ -30,7 +37,7 @@ class Bot(commands.AutoShardedBot):
         self.creator = "Bambus#8446"
         self.github_url = "https://github.com/Bmbus/DiscordAnalytica"
         #self.owner_id = OWNER_ID
-        #self.db = DbClient().collection
+        self.db = DbClient().collection
 
         for ext in COGS:
             try:
@@ -47,6 +54,18 @@ class Bot(commands.AutoShardedBot):
             return
         await self.process_commands(message)
     
+    async def on_guild_join(self, guild):
+        try:
+            await Database().init_db(str(guild.id))
+        except:
+            return
+
+    async def on_guild_remove(self, guild):
+        try:
+            await Database().delete_db(str(guild.id))
+        except:
+            return
+
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.BotMissingPermissions):
             return await ctx.send(ErrorEmbed(str(error)))
