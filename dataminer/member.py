@@ -12,13 +12,15 @@ class Member(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         push_data = {"timestamp": utcnow}
-        await self.bot.db.update({"_id": str(member.guild.id)}, {"$push": {"userjoins": push_data}})
+        await self.bot.db.update_many({"_id": str(member.guild.id)}, {"$push": {"userjoins": push_data}})
+        await self.bot.db.update_many({"_id": str(member.guild.id)}, {"$push": {"users": {"timestamp": utcnow, "count": member.guild.member_count}}})
         return
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         push_data = {"timestamp": utcnow}
         await self.bot.db.update_many({"_id": str(member.guild.id)}, {"$push": {"userleave": push_data}})
+        await self.bot.db.update_many({"_id": str(member.guild.id)}, {"$push": {"users": {"timestamp": utcnow, "count": member.guild.member_count}}})
         return
     
     @commands.Cog.listener()

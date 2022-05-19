@@ -5,7 +5,7 @@ from config import TOKEN
 import datetime
 #from database.database import DbClient
 
-COGS = ["dataminer.status"]
+COGS = []
 
 class Bot(commands.AutoShardedBot):
     def __init__(self, **kwargs):
