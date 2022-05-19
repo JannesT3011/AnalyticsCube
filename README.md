@@ -13,5 +13,5 @@
 - [X] kick, ban, unban
 - [X] invite create
 - [X] voice channel 
-- [ ] count users every day (once)
+- [X] count users
 - [ ] how much messages did this bot send?

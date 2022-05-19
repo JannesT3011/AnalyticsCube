@@ -1,9 +1,7 @@
-from selectors import SelectorKey
 import discord
 from discord.ext import commands
-from pytz import utc
 from . import utcnow
-from .bot_data import bot_messages
+from .bot_data import bot_messages, bot_requests
 from .mentions import mentions_data
 
 class Message(commands.Cog):
@@ -23,6 +21,7 @@ class Message(commands.Cog):
             await mentions_data(message, self.bot.db)
             return
         if message.content.startswith("da."):
+            await bot_requests(message)
             return
         roles = []
         for role in message.author.roles:

@@ -51,6 +51,7 @@ class Bot(commands.AutoShardedBot):
         print(f"{self.user.id}\n"f"{utils.oauth_url(self.user.id)}\n"f"{self.user.name}\n""Ready!")
 
     async def on_message(self, message):
+        """IGNORE PRIVATE MESSAGE"""
         if not message.guild:
             return
         await self.process_commands(message)
