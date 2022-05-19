@@ -3,14 +3,27 @@ from discord.ext import commands
 from discord import utils
 from config import TOKEN
 import datetime
+#from database.database import DbClient
 
-COGS = []
+COGS = ["dataminer.status"]
 
 class Bot(commands.AutoShardedBot):
     def __init__(self, **kwargs):
+        intents = discord.Intents(
+            guilds=True,
+            members=True,
+            bans=True,
+            emojis=True,
+            voice_states=True,
+            messages=True,
+            reactions=True,
+            presences=True,
+            invites=True
+        )
         super(Bot, self).__init__(
             command_prefix="da.",
-            description="A discord bot that analyze your discord server"
+            description="A discord bot that analyze your discord server",
+            intents=intents,
         )
         self.launch = __import__("datetime").datetime.utcnow()
         self.version = "0.0.1"
