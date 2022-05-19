@@ -4,6 +4,7 @@ from discord import utils
 from config import TOKEN
 import datetime
 from database.database import DbClient, Database
+from dataminer import utcnow
 
 COGS = [
     "dataminer.guild",
@@ -57,6 +58,7 @@ class Bot(commands.AutoShardedBot):
     async def on_guild_join(self, guild):
         try:
             await Database().init_db(str(guild.id))
+            await self.bot.db.update_many({"_id": str(guild.id)}, {"$push": {"users": {"timestamp": utcnow, "count": guild.member_count}}})
         except:
             return
 
