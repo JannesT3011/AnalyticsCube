@@ -3,6 +3,7 @@ from discord.ext import commands
 from . import utcnow
 from .bot_data import bot_messages, bot_requests
 from .mentions import mentions_data
+from config import PREFIX
 
 class Message(commands.Cog):
     def __init__(self, bot):
@@ -19,7 +20,7 @@ class Message(commands.Cog):
         if len(message.role_mentions) > 0:
             await mentions_data(message, self.bot.db)
             return
-        if message.content.startswith("da."):
+        if message.content.startswith(PREFIX):
             return
         roles = []
         for role in message.author.roles:

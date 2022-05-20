@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from discord import utils
-from config import TOKEN
+from config import TOKEN, PREFIX
 import datetime
 from database.database import DbClient, Database
 from dataminer import utcnow
@@ -12,7 +12,10 @@ COGS = [
     "dataminer.message",
     "dataminer.reactions",
     "dataminer.status",
-    "dataminer.voice"
+    "dataminer.voice",
+
+    "cogs.analyze",
+    "cogs.stats"
 ]
 
 class Bot(commands.AutoShardedBot):
@@ -29,7 +32,7 @@ class Bot(commands.AutoShardedBot):
             invites=True
         )
         super(Bot, self).__init__(
-            command_prefix="da.",
+            command_prefix=PREFIX,
             description="A discord bot that analyze your discord server",
             intents=intents,
         )
@@ -71,19 +74,19 @@ class Bot(commands.AutoShardedBot):
 
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.BotMissingPermissions):
-            return await ctx.send(ErrorEmbed(str(error)))
+            return await ctx.send(embed=ErrorEmbed(str(error)))
 
         elif isinstance(error, commands.BotMissingPermissions):
-            return await ctx.send(ErrorEmbed(str(error)))
+            return await ctx.send(embed=ErrorEmbed(str(error)))
         
         elif isinstance(error, commands.BotMissingRole):
-            return await ctx.send(ErrorEmbed(str(error)))
+            return await ctx.send(embed=ErrorEmbed(str(error)))
         
         elif isinstance(error, commands.CheckFailure):
-            return await ctx.send(ErrorEmbed(str(error)))
+            return await ctx.send(embed=ErrorEmbed(str(error)))
         
         elif isinstance(error, commands.CommandNotFound):
-            return await ctx.send(ErrorEmbed("This isn't a command! Please use the `help` command"))
+            return await ctx.send(embed=ErrorEmbed("This isn't a command! Please use the `help` command"))
         
         elif isinstance(error, commands.BadArgument):
             owner = self.get_user(self.owner_id)
