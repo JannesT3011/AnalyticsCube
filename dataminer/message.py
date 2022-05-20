@@ -14,14 +14,12 @@ class Message(commands.Cog):
         if not message.guild:
             return
         if message.author.bot:
-            # TODO count bot messages
             await bot_messages(message, self.bot.db)
             return
         if len(message.role_mentions) > 0:
             await mentions_data(message, self.bot.db)
             return
         if message.content.startswith("da."):
-            await bot_requests(message)
             return
         roles = []
         for role in message.author.roles:
