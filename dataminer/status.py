@@ -21,17 +21,14 @@ class Status(commands.Cog):
                 await self.bot.db.update_many({"_id": str(after.guild.id)}, {"$push": {"status": push_data}})
         except IndexError:
             pass
-
-        if isinstance(after.activities[0], discord.Game):
-            game = after.activities[0].name
-            push_data = {"timestamp": utcnow, "game": game, "roles": roles}
-            await self.bot.db.update_many({"_id": str(after.guild.id)}, {"$push": {"status": push_data}})
-    
-    #@commands.Cog.listener()
-    #async def on_presence_update(self, before, after):
-    #    """CALLED WHEN A MEMBER UPDATES THEIR STATUS/GAME"""
-    #    print(before.status)
-    #    print(after.status)
+        
+        try:
+            if isinstance(after.activities[0], discord.Game):
+                game = after.activities[0].name
+                push_data = {"timestamp": utcnow, "game": game, "roles": roles}
+                await self.bot.db.update_many({"_id": str(after.guild.id)}, {"$push": {"status": push_data}})
+        except IndexError:
+            pass
 
 def setup(bot):
     bot.add_cog(Status(bot))
