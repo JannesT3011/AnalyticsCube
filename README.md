@@ -15,3 +15,23 @@
 - [X] voice channel 
 - [X] count users
 - [ ] how much messages did this bot send?
+
+#### Analytics
+- [X] message
+- [X] message delete
+- [X] message edit
+- [X] reaction
+- [X] bot msg
+- [X] bot requests
+- [X] users
+- [X] userjoins
+- [X] userleaves
+- [X] mentions 
+- [X] user bans
+- [X] user unbans
+- [X] voice 
+- [X] user nick change
+- [X] status
+- [X] invite create
+- [ ] other prefix
+- [X] guild update

@@ -26,7 +26,7 @@ class Stats(commands.Cog):
         embed.add_field(name="Total user-leaves:*", value=f"{len(data['userleave'])}", inline=False)
         embed.add_field(name="Total mentions:*", value=f"{len(data['mentions'])}", inline=False)
         embed.add_field(name="Total bot messages:*", value=f"{len(data['bot_msg'])}", inline=False)
-        embed.set_footer(text=f"Since I joined the server: {data['server_join']}", icon_url=self.bot.user.avatar_url)
+        embed.set_footer(text=f"Since I joined the server: {data['server_join']}", icon_url=self.bot.user.avatar_url) # TODO add total users, channels ...
 
         return await ctx.send(embed=embed)
 

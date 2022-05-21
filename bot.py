@@ -51,6 +51,7 @@ class Bot(commands.AutoShardedBot):
                 raise e
     
     async def on_ready(self):
+        await self.change_presence(activity=discord.Game(name=f"{PREFIX}help"))
         print(f"{self.user.id}\n"f"{utils.oauth_url(self.user.id)}\n"f"{self.user.name}\n""Ready!")
 
     async def on_message(self, message):
