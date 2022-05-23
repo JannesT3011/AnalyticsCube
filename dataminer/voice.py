@@ -1,7 +1,6 @@
 from click import command
 import discord
 from discord.ext import commands
-from pytz import utc
 from . import utcnow
 
 class Voice(commands.Cog):

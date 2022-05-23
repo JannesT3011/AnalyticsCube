@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from pytz import utc
 from . import utcnow
 
 class Guild(commands.Cog):

@@ -14,7 +14,12 @@
 - [X] invite create
 - [X] voice channel 
 - [X] count users
-- [ ] how much messages did this bot send?
+- [X] how much messages did this bot send?
+- [X] role info
+- [X] user info
+- [ ] config command
+- [X] blacklist channel
+- [ ] plot
 
 #### Analytics
 - [X] message
@@ -35,7 +40,3 @@
 - [X] invite create
 - [ ] other prefix
 - [X] guild update
-- [X] role info
-- [X] user info
-- [ ] config command
-- [ ] blacklist channel

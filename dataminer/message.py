@@ -4,6 +4,7 @@ from . import utcnow
 from .bot_data import bot_messages, bot_requests
 from .mentions import mentions_data
 from config import PREFIX
+from util.checks import in_blacklist
 
 class Message(commands.Cog):
     def __init__(self, bot):
@@ -12,6 +13,8 @@ class Message(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         """EVENT IS CALLED WHEN A USER SEND A MESSAGE"""
+        if in_blacklist(self.bot.db, message.guild, message.channel):
+            return
         if not message.guild:
             return
         if message.author.bot:
@@ -32,6 +35,8 @@ class Message(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
+        if in_blacklist(self.bot.db, after.guild, after.channel):
+            return
         roles = []
         for role in after.author.roles:
             roles.append(str(role))
@@ -41,6 +46,8 @@ class Message(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message_delete(self, message):
+        if in_blacklist(self.bot.db, message.guild, message.channel):
+            return
         roles = []
         for role in message.author.roles:
             roles.append(str(role))

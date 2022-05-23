@@ -2,6 +2,7 @@ from discord.ext import commands
 from datetime import datetime
 from . import utcnow
 import unicodedata
+from util.checks import in_blacklist
 
 """
 COLLECT DATA FROM REACTIONS !
@@ -14,6 +15,8 @@ class Reaction(commands.Cog):
     @commands.Cog.listener()
     async def on_reaction_add(self, reaction, user):
         """EVENT IS CALLED WHEN A USER ADDS AN REACTION"""
+        if in_blacklist(self.bot.db, reaction.message.guild, reaction.message.channel):
+            return
         if not reaction.message.guild:
             return
         if user.bot:
