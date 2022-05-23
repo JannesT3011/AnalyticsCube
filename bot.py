@@ -15,7 +15,9 @@ COGS = [
     "dataminer.voice",
 
     "cogs.analyze",
-    "cogs.stats"
+    "cogs.stats",
+    "cogs.role_info",
+    "cogs.user_info"
 ]
 
 class Bot(commands.AutoShardedBot):

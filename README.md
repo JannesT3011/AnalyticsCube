@@ -35,3 +35,7 @@
 - [X] invite create
 - [ ] other prefix
 - [X] guild update
+- [X] role info
+- [X] user info
+- [ ] config command
+- [ ] blacklist channel
