@@ -19,7 +19,7 @@
 - [X] user info
 - [ ] config command
 - [X] blacklist channel
-- [ ] plot
+- [ ] plot > imgur api
 
 #### Analytics
 - [X] message

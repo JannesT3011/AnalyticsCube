@@ -13,7 +13,7 @@ class Message(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         """EVENT IS CALLED WHEN A USER SEND A MESSAGE"""
-        if in_blacklist(self.bot.db, message.guild, message.channel):
+        if await in_blacklist(self.bot.db, message.guild, message.channel):
             return
         if not message.guild:
             return
@@ -35,7 +35,7 @@ class Message(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
-        if in_blacklist(self.bot.db, after.guild, after.channel):
+        if await in_blacklist(self.bot.db, after.guild, after.channel):
             return
         roles = []
         for role in after.author.roles:
@@ -46,7 +46,7 @@ class Message(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message_delete(self, message):
-        if in_blacklist(self.bot.db, message.guild, message.channel):
+        if await in_blacklist(self.bot.db, message.guild, message.channel):
             return
         roles = []
         for role in message.author.roles:

@@ -15,7 +15,7 @@ class Reaction(commands.Cog):
     @commands.Cog.listener()
     async def on_reaction_add(self, reaction, user):
         """EVENT IS CALLED WHEN A USER ADDS AN REACTION"""
-        if in_blacklist(self.bot.db, reaction.message.guild, reaction.message.channel):
+        if await in_blacklist(self.bot.db, reaction.message.guild, reaction.message.channel):
             return
         if not reaction.message.guild:
             return
