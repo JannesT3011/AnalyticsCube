@@ -20,12 +20,22 @@ class Stats(commands.Cog):
 
         embed = Embed(title=f"{ctx.guild.name} ~ general stats", timestamp=datetime.utcnow())
         embed.add_field(name="Total messages send:*", value=f"{len(data['message'])}", inline=False)
+        embed.add_field(name="Total message edited:*", value=f"{len(data['message_edit'])}", inline=False)
+        embed.add_field(name="Total message deleted:*", value=f"{len(data['message_delete'])}", inline=False)
         embed.add_field(name="Total reactions added:*", value=f"{len(data['reaction'])}", inline=False)
         embed.add_field(name="Total bot requests:*", value=f"{len(data['bot_requests'])}", inline=False)
+        embed.add_field(name="Total bot messages:*", value=f"{len(data['bot_msg'])}", inline=False)
         embed.add_field(name="Total user-joins:*", value=f"{len(data['userjoins'])}", inline=False)
         embed.add_field(name="Total user-leaves:*", value=f"{len(data['userleave'])}", inline=False)
         embed.add_field(name="Total mentions:*", value=f"{len(data['mentions'])}", inline=False)
-        embed.add_field(name="Total bot messages:*", value=f"{len(data['bot_msg'])}", inline=False)
+        embed.add_field(name="Total status/game changes counted:*", value=f"{len(data['status'])}")
+        embed.add_field(name="Total user bans counted:*", value=len(data['user_ban']), inline=False)
+        embed.add_field(name="Total user bans counted:*", value=len(data['user_unban']), inline=False)
+        embed.add_field(name="Total voice joins/leaves:*", value=len(data['voice']), inline=False)
+        embed.add_field(name="Total nickname changes counted:*", value=len(data['user_nickchange']), inline=False)
+        embed.add_field(name="Total invites created", value=len(data['invite_create']), inline=False)
+        embed.add_field(name="Total guild updated counted:*", value=len(data['guild_update']), inline=False)
+        embed.add_field(name="Total users:", value=f"{ctx.guild.member_count}", inline=False)
         embed.set_footer(text=f"Since I joined the server: {data['server_join']}", icon_url=self.bot.user.avatar_url) # TODO add total users, channels ...
 
         return await ctx.send(embed=embed)
