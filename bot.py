@@ -17,7 +17,8 @@ COGS = [
     "cogs.analyze",
     "cogs.stats",
     "cogs.role_info",
-    "cogs.user_info"
+    "cogs.user_info",
+    "cogs.blacklist"
 ]
 
 class Bot(commands.AutoShardedBot):

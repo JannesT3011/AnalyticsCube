@@ -52,6 +52,7 @@ def db_layout(guildid: str):
                     "other_prefix": [],
                     "guild_update": [],
                     "prefix": "",
+                    "blacklist": [],
                     "server_join": utcnow,
                     }
 
