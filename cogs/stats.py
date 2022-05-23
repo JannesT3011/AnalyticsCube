@@ -8,6 +8,7 @@ class Stats(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.has_permissions(administrator=True)
     @commands.cooldown(1, 5.0, commands.BucketType.user)
     @commands.command(name="stats")
     async def _stats(self, ctx):
@@ -36,6 +37,8 @@ class Stats(commands.Cog):
         embed.add_field(name="Total invites created", value=len(data['invite_create']), inline=False)
         embed.add_field(name="Total guild updated counted:*", value=len(data['guild_update']), inline=False)
         embed.add_field(name="Total users:", value=f"{ctx.guild.member_count}", inline=False)
+        embed.add_field(name="Total text channels:", value=len(ctx.guild.text_channels), inline=False)
+        embed.add_field(name="Total voice channels", value=len(ctx.guild.voice_channels), inline=False)
         embed.set_footer(text=f"Since I joined the server: {data['server_join']}", icon_url=self.bot.user.avatar_url) # TODO add total users, channels ...
 
         return await ctx.send(embed=embed)
