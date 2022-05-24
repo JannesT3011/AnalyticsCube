@@ -16,12 +16,6 @@ def upload_to_imgur(path:str) -> str: # TODO async
    
     return link
 
- # TODO check if data == 0
-
-def ploat_overall():
-    # liniengraph mit: Y achse anzahl (count der gesamten daten (lendata)); X: timestamp
-    return
-
 def plot_timestamp_hours(data:dict, guildid:str, name:str) -> str:
     df = pd.DataFrame(data)
     df["timestamp"] = pd.to_datetime(df["timestamp"])

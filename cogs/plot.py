@@ -18,7 +18,8 @@ class Plot(commands.Cog):
     @plot.command(name="message")
     async def plot_message(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["message"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)        
         hour_plot = plot_timestamp_hours(data["message"], str(ctx.guild.id), "message")
         weekday_plot = plot_timestamp_weekdays(data["message"], str(ctx.guild.id), "message")
         channel_plot = plot_channels(data["message"], str(ctx.guild.id), "message", self.bot)
@@ -39,7 +40,8 @@ class Plot(commands.Cog):
     @plot.command(name="message_edit")
     async def plot_message_edit(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["message_edit"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)        
         hour_plot = plot_timestamp_hours(data["message_edit"], str(ctx.guild.id), "message edits")
         weekday_plot = plot_timestamp_weekdays(data["message_edit"], str(ctx.guild.id), "message edits")
         channel_plot = plot_channels(data["message_edit"], str(ctx.guild.id), "message edits", self.bot)
@@ -60,7 +62,8 @@ class Plot(commands.Cog):
     @plot.command(name="message_delete")
     async def plot_message_delete(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["message_delete"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)        
         hour_plot = plot_timestamp_hours(data["message_delete"], str(ctx.guild.id), "message")
         weekday_plot = plot_timestamp_weekdays(data["message_delete"], str(ctx.guild.id), "message")
         channel_plot = plot_channels(data["message_delete"], str(ctx.guild.id), "message", self.bot)
@@ -81,7 +84,8 @@ class Plot(commands.Cog):
     @plot.command(name="reaction")
     async def plot_reaction(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["reaction"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)        
         hour_plot = plot_timestamp_hours(data["reaction"], str(ctx.guild.id), "reaction")
         weekday_plot = plot_timestamp_weekdays(data["reaction"], str(ctx.guild.id), "reaction")
         channel_plot = plot_channels(data["reaction"], str(ctx.guild.id), "reaction", self.bot)
@@ -102,7 +106,8 @@ class Plot(commands.Cog):
     @plot.command(name="botrequests")
     async def plot_botrequests(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["bot_requests"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)        
         hour_plot = plot_timestamp_hours(data["bot_requests"], str(ctx.guild.id), "bot_requests")
         weekday_plot = plot_timestamp_weekdays(data["bot_requests"], str(ctx.guild.id), "bot_requests")
         channel_plot = plot_channels(data["bot_requests"], str(ctx.guild.id), "bot_requests", self.bot)
@@ -123,7 +128,8 @@ class Plot(commands.Cog):
     @plot.command(name="userjoin")
     async def plot_userjoin(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["userjoins"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)        
         hour_plot = plot_timestamp_hours(data["userjoins"], str(ctx.guild.id), "userjoins")
         weekday_plot = plot_timestamp_weekdays(data["userjoins"], str(ctx.guild.id), "userjoins")
 
@@ -142,7 +148,8 @@ class Plot(commands.Cog):
     @plot.command(name="userleaves")
     async def plot_userleave(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["userleave"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)        
         hour_plot = plot_timestamp_hours(data["userleave"], str(ctx.guild.id), "userleave")
         weekday_plot = plot_timestamp_weekdays(data["userleave"], str(ctx.guild.id), "userleave")
 
@@ -161,7 +168,8 @@ class Plot(commands.Cog):
     @plot.command(name="mentions", aliases=["mention"])
     async def plot_mentions(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["mentions"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)        
         hour_plot = plot_timestamp_hours(data["mentions"], str(ctx.guild.id), "mentions")
         weekday_plot = plot_timestamp_weekdays(data["mentions"], str(ctx.guild.id), "mentions")
         channel_plot = plot_channels(data["mentions"], str(ctx.guild.id), "mentions", self.bot)
@@ -182,7 +190,8 @@ class Plot(commands.Cog):
     @plot.command(name="botmsg", aliases=["bot_msg", "bot-msg"])
     async def plot_botmsg(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["bot_msg"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)
         hour_plot = plot_timestamp_hours(data["bot_msg"], str(ctx.guild.id), "bot_msg")
         weekday_plot = plot_timestamp_weekdays(data["bot_msg"], str(ctx.guild.id), "bot_msg")
         channel_plot = plot_channels(data["bot_msg"], str(ctx.guild.id), "bot_msg", self.bot)
@@ -203,7 +212,8 @@ class Plot(commands.Cog):
     @plot.command(name="status", aliases=["game"])
     async def plot_status(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["status"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)
         hour_plot = plot_timestamp_hours(data["status"], str(ctx.guild.id), "status")
         weekday_plot = plot_timestamp_weekdays(data["status"], str(ctx.guild.id), "status")
 
@@ -227,7 +237,8 @@ class Plot(commands.Cog):
     @plot.command(name="user_ban")
     async def plot_user_ban(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["user_ban"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)
         hour_plot = plot_timestamp_hours(data["user_ban"], str(ctx.guild.id), "user_ban")
         weekday_plot = plot_timestamp_weekdays(data["user_ban"], str(ctx.guild.id), "user_ban")
 
@@ -246,7 +257,8 @@ class Plot(commands.Cog):
     @plot.command(name="user_unban")
     async def plot_user_unban(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["user_unban"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)
         hour_plot = plot_timestamp_hours(data["user_unban"], str(ctx.guild.id), "user_unban")
         weekday_plot = plot_timestamp_weekdays(data["user_unban"], str(ctx.guild.id), "user_unban")
 
@@ -265,7 +277,8 @@ class Plot(commands.Cog):
     @plot.command(name="voice")
     async def plot_voice(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["voice"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)
         hour_plot = plot_timestamp_hours(data["voice"], str(ctx.guild.id), "voice")
         weekday_plot = plot_timestamp_weekdays(data["voice"], str(ctx.guild.id), "voice")
         channel_plot = plot_channels(data["voice"], str(ctx.guild.id), "voice", self.bot)
@@ -286,7 +299,8 @@ class Plot(commands.Cog):
     @plot.command(name="user_nickchange")
     async def plot_user_nickchange(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["user_nickchange"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)
         hour_plot = plot_timestamp_hours(data["user_nickchange"], str(ctx.guild.id), "user_nickchange")
         weekday_plot = plot_timestamp_weekdays(data["user_nickchange"], str(ctx.guild.id), "user_nickchange")
 
@@ -305,7 +319,8 @@ class Plot(commands.Cog):
     @plot.command(name="invites")
     async def plot_invites(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["invite_create"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)
         hour_plot = plot_timestamp_hours(data["invite_create"], str(ctx.guild.id), "invite_create")
         weekday_plot = plot_timestamp_weekdays(data["invite_create"], str(ctx.guild.id), "invite_create")
 
@@ -324,7 +339,8 @@ class Plot(commands.Cog):
     @plot.command(name="guild_updates")
     async def plot_guild_updates(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
-        
+        if len(data["guild_update"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)
         hour_plot = plot_timestamp_hours(data["guild_update"], str(ctx.guild.id), "guild_update")
         weekday_plot = plot_timestamp_weekdays(data["guild_update"], str(ctx.guild.id), "guild_update")
 
