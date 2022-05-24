@@ -9,12 +9,14 @@ class Plot(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.has_permissions(administrator=True)
     @commands.group(name='plot', invoke_without_command=True)
     async def plot(self, ctx):
         return await ctx.send('test')
     
 
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="message")
     async def plot_message(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -37,6 +39,7 @@ class Plot(commands.Cog):
         return await paginator.run()
 
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="message_edit")
     async def plot_message_edit(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -59,6 +62,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="message_delete")
     async def plot_message_delete(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -81,6 +85,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="reaction")
     async def plot_reaction(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -103,6 +108,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="botrequests")
     async def plot_botrequests(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -125,6 +131,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="userjoin")
     async def plot_userjoin(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -145,6 +152,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="userleaves")
     async def plot_userleave(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -165,6 +173,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="mentions", aliases=["mention"])
     async def plot_mentions(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -187,6 +196,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="botmsg", aliases=["bot_msg", "bot-msg"])
     async def plot_botmsg(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -209,6 +219,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="status", aliases=["game"])
     async def plot_status(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -229,11 +240,13 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="users")
     async def plot_users(self, ctx):
         return
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="user_ban")
     async def plot_user_ban(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -254,6 +267,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="user_unban")
     async def plot_user_unban(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -274,6 +288,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="voice")
     async def plot_voice(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -296,6 +311,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="user_nickchange")
     async def plot_user_nickchange(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -316,6 +332,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="invites")
     async def plot_invites(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
@@ -336,6 +353,7 @@ class Plot(commands.Cog):
         return await paginator.run()
     
     @commands.has_permissions(administrator=True)
+    @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="guild_updates")
     async def plot_guild_updates(self, ctx):
         data = await load_data(self.bot.db, str(ctx.guild.id))
