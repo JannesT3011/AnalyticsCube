@@ -87,7 +87,7 @@ class Analyze(commands.Cog):
     
     @commands.cooldown(1, 10.0, commands.BucketType.user)
     @commands.cooldown(1, 10.0, commands.BucketType.user)
-    @analyze_command.command(name="userleaves", aliases=["userleave"])
+    @analyze_command.command(name="userleaves")
     async def analyze_command_userleaves(self, ctx):
         embeds = await Analytics(str(ctx.guild.id), self.bot.db).analyze_userleave()
         
