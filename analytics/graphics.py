@@ -83,3 +83,19 @@ def plot_channels(data:dict, guildid, name:str, bot) -> str:
     os.remove(path)
     
     return link
+
+def plot_users(data:dict, guildid) -> str:
+    df = pd.DataFrame(data)
+    x = df["timestamp"]
+    y = df["count"]
+    plt.plot(np.array(x), np.array(y))
+    plt.xlabel("Time")
+    plt.ylabel(f"Users-Count")
+    plt.title(f"User counts")
+    path = f"{guildid}_user_count.png"
+    plt.savefig(path)
+    link = upload_to_imgur(path)
+    plt.close()
+    os.remove(path)
+   
+    return link

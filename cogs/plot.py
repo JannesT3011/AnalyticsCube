@@ -19,6 +19,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="message")
     async def plot_message(self, ctx):
+        """PLOT MESSAGE DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["message"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)        
@@ -42,6 +43,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="message_edit")
     async def plot_message_edit(self, ctx):
+        """PLOT MESSAGE EDIT DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["message_edit"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)        
@@ -65,6 +67,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="message_delete")
     async def plot_message_delete(self, ctx):
+        """PLOT MESSAGE DELETE DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["message_delete"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)        
@@ -88,6 +91,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="reaction")
     async def plot_reaction(self, ctx):
+        """PLOT REACTION DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["reaction"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)        
@@ -111,6 +115,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="botrequests")
     async def plot_botrequests(self, ctx):
+        """PLOT BOT REQUESTS DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["bot_requests"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)        
@@ -134,6 +139,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="userjoin")
     async def plot_userjoin(self, ctx):
+        """PLOT USERJOIN DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["userjoins"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)        
@@ -155,6 +161,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="userleaves")
     async def plot_userleave(self, ctx):
+        """PLOT USERLEAVES DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["userleave"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)        
@@ -176,6 +183,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="mentions", aliases=["mention"])
     async def plot_mentions(self, ctx):
+        """PLOT MENTIONS DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["mentions"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)        
@@ -199,6 +207,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="botmsg", aliases=["bot_msg", "bot-msg"])
     async def plot_botmsg(self, ctx):
+        """PLOT BOTMSG DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["bot_msg"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)
@@ -222,6 +231,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="status", aliases=["game"])
     async def plot_status(self, ctx):
+        """PLOT STATUS DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["status"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)
@@ -243,12 +253,20 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="users")
     async def plot_users(self, ctx):
-        return
+        """PLOT USERS DATA"""
+        data = await load_data(self.bot.db, str(ctx.guild.id))
+        if len(data["users"]) == 0:
+            return await ctx.send("No data collected yet!", delete_after=4)
+        
+        link = plot_users(data["users"], str(ctx.guild.id))
+
+        return await ctx.send(embed=Embed(title="User count plot", description="See the trend of user count").set_image(url=link))
     
     @commands.has_permissions(administrator=True)
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="user_ban")
     async def plot_user_ban(self, ctx):
+        """PLOT USER BAN DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["user_ban"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)
@@ -270,6 +288,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="user_unban")
     async def plot_user_unban(self, ctx):
+        """PLOT USER UNBAN DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["user_unban"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)
@@ -291,6 +310,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="voice")
     async def plot_voice(self, ctx):
+        """PLOT VOICE DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["voice"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)
@@ -314,6 +334,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="user_nickchange")
     async def plot_user_nickchange(self, ctx):
+        """PLOT USER NICKCHANGE DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["user_nickchange"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)
@@ -335,6 +356,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="invites")
     async def plot_invites(self, ctx):
+        """PLOT INVITES DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["invite_create"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)
@@ -356,6 +378,7 @@ class Plot(commands.Cog):
     @commands.cooldown(1, 30.0, commands.BucketType.user)
     @plot.command(name="guild_updates")
     async def plot_guild_updates(self, ctx):
+        """PLOT GUILD UPDATES DATA"""
         data = await load_data(self.bot.db, str(ctx.guild.id))
         if len(data["guild_update"]) == 0:
             return await ctx.send("No data collected yet!", delete_after=4)

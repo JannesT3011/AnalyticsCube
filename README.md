@@ -53,6 +53,8 @@ python3 bot.py
 | roleinfo `role`| Infos about a given role |
 
 ! All commands can only be executed from users with admin rights !
+
+
 `* see categorys in fallowing table` 
 
 ### Which data will be collected?
