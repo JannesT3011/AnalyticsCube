@@ -107,3 +107,4 @@ You can also blacklist channels, so that no data will collected in these!
 - [X] plot > imgur api
 - [ ] user plot
 - [ ] blacklist specific data that then not will be collected
+- [ ] interfaces -> when send cs.plot/analyze without argument SELECT option of category

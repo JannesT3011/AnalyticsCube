@@ -42,10 +42,10 @@ class Bot(commands.AutoShardedBot):
             intents=intents,
         )
         self.launch = __import__("datetime").datetime.utcnow()
-        self.version = "0.0.1"
+        self.version = "0.6.1"
         self.creator = "Bambus#8446"
-        self.github_url = "https://github.com/Bmbus/DiscordAnalytica"
-        #self.owner_id = OWNER_ID
+        self.github_url = "https://github.com/JannesT3011/AnalyticsCube"
+        
         self.db = DbClient().collection
 
         for ext in COGS:
