@@ -1,0 +1,5 @@
+disputils
+pandas
+discord.py
+matplotlib
+motor
