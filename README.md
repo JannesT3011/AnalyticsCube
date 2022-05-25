@@ -22,13 +22,16 @@ nano config.py
 
 This file should look like this:
 ```python
+# DISCORD BOT CONFIG
 TOKEN = ""
+PREFIX = ""
+
+# DATABASE CONFIG
 CONNECTION = ""
 CLUSTER = ""
 DB = ""
-PREFIX = ""
 
-#IMGUR
+#IMGUR API CONFIG
 IMGUR_CLIENT_ID = ""
 IMGUR_CLIENT_SECRET = ""
 ```
@@ -46,12 +49,13 @@ python3 bot.py
 | analyze `category`*| Give you stats about the collected data and category |
 | plot `category`*| Plot collected data of given category|
 | blacklist `add/remove`| Blacklist channel! (In this channel will be no data collected) |
-| userinfo | Infos about a given user |
-| roleinfo | Infos about a given role |
+| userinfo `user`| Infos about a given user |
+| roleinfo `role`| Infos about a given role |
 
+! All commands can only be executed from users with admin rights !
 `* see categorys in fallowing table` 
 
-### Which data will be collected? (table)
+### Which data will be collected?
 
  | Category/Name | Data that will be collected |
 | --- | ----------- |
@@ -71,7 +75,7 @@ python3 bot.py
  | `voice` | `timestamp`, `join/leave`, `role of user`, `channelid`, `afk status`, `stream`, `video status (on/off)`
  | `invites` | `timestamp`
  | `guild_updates` | `timestamp`
- | `users` | `user count`
+ | `users` | `timestamp`, `user count`
 
 ### Whats will be NOT collected?
 
