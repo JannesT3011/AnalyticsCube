@@ -19,8 +19,8 @@ COGS = [
     "cogs.role_info",
     "cogs.user_info",
     "cogs.blacklist",
-
-    "cogs.plot"
+    "cogs.plot",
+    "cogs.help"
 ]
 
 class Bot(commands.AutoShardedBot):
@@ -48,14 +48,18 @@ class Bot(commands.AutoShardedBot):
         
         self.db = DbClient().collection
 
+        self.remove_command("help")
+
+    async def load_cogs(self):
         for ext in COGS:
             try:
-                self.load_extension(ext)
+                await self.load_extension(ext)
             except Exception as e:
                 print(f"Cant load {ext}")
                 raise e
     
     async def on_ready(self):
+        await self.load_cogs()
         await self.change_presence(activity=discord.Game(name=f"{PREFIX}help"))
         print(f"{self.user.id}\n"f"{utils.oauth_url(self.user.id)}\n"f"{self.user.name}\n""Ready!")
 

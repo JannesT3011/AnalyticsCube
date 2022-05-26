@@ -396,5 +396,5 @@ class Plot(commands.Cog):
 
         return await paginator.run()
 
-def setup(bot):
-    bot.add_cog(Plot(bot))
+async def setup(bot):
+    await bot.add_cog(Plot(bot))

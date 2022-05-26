@@ -17,5 +17,5 @@ class Guild(commands.Cog):
         await self.bot.db.update_many({"_id": str(after.guild.id)}, {"$push": {"guild_update": push_data}})
 
 
-def setup(bot):
-    bot.add_cog(Guild(bot))
+async def setup(bot):
+    await bot.add_cog(Guild(bot))

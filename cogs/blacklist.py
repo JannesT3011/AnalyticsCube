@@ -33,5 +33,5 @@ class Blacklist(commands.Cog):
         await self.bot.db.update_many({"_id": str(ctx.guild.id)}, {"$pull": {"blacklist": str(channel.id)}})
         return await ctx.send("Channel successfully removed from blacklist!", delete_after=4)
 
-def setup(bot):
-    bot.add_cog(Blacklist(bot))
+async def setup(bot):
+    await bot.add_cog(Blacklist(bot))

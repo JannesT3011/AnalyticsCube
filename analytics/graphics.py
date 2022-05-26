@@ -99,3 +99,18 @@ def plot_users(data:dict, guildid) -> str:
     os.remove(path)
    
     return link
+
+
+def ploat_overall():
+    # liniengraph mit: Y achse anzahl (count der gesamten daten (lendata)); X: timestamp
+    #def plot_roles(data:dict, guild, name:str) -> str:
+#    roles = []
+#    for _roles in data["roles"]:
+#        for role in _roles:
+#            roles.append(role)
+#    df = pd.DataFrame(data)
+#    # TODO erstmal alle rollen in eine liste packen und dann counten (DA: in data meistes mehrere rollen in einer liste sind (dise auflösen))
+#    role_count = pd.value_counts(roles)
+#    
+#    return
+    return

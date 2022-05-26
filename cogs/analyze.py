@@ -216,5 +216,5 @@ class Analyze(commands.Cog):
         
         return await paginator.run()
 
-def setup(bot):
-    bot.add_cog(Analyze(bot))
+async def setup(bot):
+    await bot.add_cog(Analyze(bot))

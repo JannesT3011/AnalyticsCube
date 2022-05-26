@@ -30,5 +30,5 @@ class Status(commands.Cog):
         except IndexError:
             pass
 
-def setup(bot):
-    bot.add_cog(Status(bot))
+async def setup(bot):
+    await bot.add_cog(Status(bot))

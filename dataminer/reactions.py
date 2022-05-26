@@ -30,5 +30,5 @@ class Reaction(commands.Cog):
         await self.bot.db.update_many({"_id": str(reaction.message.guild.id)}, {"$push": {"reaction": push_data}})
         return
 
-def setup(bot):
-    bot.add_cog(Reaction(bot))
+async def setup(bot):
+    await bot.add_cog(Reaction(bot))
